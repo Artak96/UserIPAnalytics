@@ -1,3 +1,4 @@
+using UserIPAnalytics.Application;
 using UserIPAnalytics.Infrustructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication(builder.Configuration);
 
 
 builder.Services.AddControllers();

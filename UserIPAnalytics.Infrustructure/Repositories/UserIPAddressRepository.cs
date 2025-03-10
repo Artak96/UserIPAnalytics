@@ -33,11 +33,11 @@ namespace UserIPAnalytics.Infrustructure.Repositories
         {
             return await _context.UserIPAddress
                 .Where(uc => uc.UserId == userId)
-                .OrderByDescending(uc => uc.CreatedAt)
-                .Select(uc => new { uc.IPAddress, uc.CreatedAt })
+                .OrderByDescending(uc => uc.CreatedDate)
+                .Select(uc => new { uc.IPAddress, uc.CreatedDate })
                 .FirstOrDefaultAsync()
                 is var result && result != null
-                ? (result.IPAddress, result.CreatedAt)
+                ? (result.IPAddress, result.CreatedDate)
                 : (null, null);
         }
     }

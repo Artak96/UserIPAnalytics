@@ -7,5 +7,6 @@ namespace UserIPAnalytics.Domain.Abstractions
         IUserIPAddressRepository UserIPAddress { get; }
         IUserReppository User { get; }
 
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

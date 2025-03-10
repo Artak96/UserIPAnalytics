@@ -7,6 +7,5 @@ namespace UserIPAnalytics.Domain.Entities
         public long Id { get; set; }
         public long UserId { get; set; }
         public string IPAddress { get; set; }
-        public DateTime CreatedAt { get; set; }
     }
 }

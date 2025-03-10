@@ -22,10 +22,11 @@ namespace UserIPAnalytics.Application
             {
                 Assembly[] handlersAssemblies = new[]
                 {
-            typeof(INotificationHandlerEvent).GetTypeInfo().Assembly,
-            };
+                    typeof(INotificationHandlerEvent).GetTypeInfo().Assembly,
+                };
                 config.RegisterServicesFromAssemblies(handlersAssemblies);
                 config.NotificationPublisher = new TaskWhenAllPublisher();
+                config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             });
 
             return services;

@@ -14,6 +14,12 @@ namespace UserIPAnalytics.Infrustructure.Data.Configurations
             builder.Property(b => b.Id)
                 .HasColumnName("Id")
                 .ValueGeneratedOnAdd();
+
+            builder.Property(b => b.CreatedDate)
+            .HasColumnName("CreatedDate");
+
+            builder.Property(b => b.UpdatedDate)
+              .HasColumnName("UpdatedDate");
         }
     }
 }

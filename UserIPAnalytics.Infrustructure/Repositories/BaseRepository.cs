@@ -14,5 +14,10 @@ namespace UserIPAnalytics.Infrustructure.Repositories
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
+
+        public async Task AddAsync(T entity)
+        {
+            await _context.AddAsync(entity);
+        }
     }
 }
