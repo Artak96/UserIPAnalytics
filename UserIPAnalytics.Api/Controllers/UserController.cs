@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Security.Claims;
@@ -32,6 +33,32 @@ namespace UserIPAnalytics.Api.Controllers
                 IpAddress = ipAddress
             });
             return Ok(new { Message = "Connection event published." });
+        }
+
+        [HttpGet("from-header")]
+        public IActionResult GetUserIdFromHeader()
+        {
+            if (Request.Headers.TryGetValue("X-User-Id", out var userIdValue) &&
+                long.TryParse(userIdValue, out long userId))
+            {
+                return Ok(new { UserId = userId });
+            }
+
+            return BadRequest("User ID is missing or invalid");
+        }
+
+        [Authorize]
+        [HttpGet("from-token")]
+        public IActionResult GetUserIdFromToken()
+        {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (long.TryParse(userIdClaim, out long userId))
+            {
+                return Ok(new { UserId = userId });
+            }
+
+            return Unauthorized("Invalid token");
         }
 
         //[HttpGet("find-users-by-ip")]

@@ -11,5 +11,11 @@ namespace UserIPAnalytics.Infrustructure.Repositories
         {
         }
 
+        public async Task<User?> GetUserByIdAsync(long Id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Id == Id);
+        }
+
+
     }
 }

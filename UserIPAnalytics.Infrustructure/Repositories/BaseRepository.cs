@@ -19,5 +19,6 @@ namespace UserIPAnalytics.Infrustructure.Repositories
         {
             await _context.AddAsync(entity);
         }
+
     }
 }
