@@ -7,8 +7,13 @@ namespace UserIPAnalytics.Infrustructure.Repositories
 {
     public class UserReposirory : BaseRepository<User>, IUserReppository
     {
-        public UserReposirory(UserIPTrackerDbContext context) : base(context)
+        public UserReposirory(UserIpAnalysticDbContext context) : base(context)
         {
+        }
+
+        public Task<List<long>> FindUserIdsByIpPrefixAsync(string ipPrefix)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<User?> GetUserByIdAsync(long Id)

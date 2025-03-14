@@ -4,9 +4,9 @@ using UserIPAnalytics.Domain.Entities;
 
 namespace UserIPAnalytics.Infrustructure.Data.Configurations
 {
-    public class UserIPAddressConfiguration : IEntityTypeConfiguration<UserIPAddress>
+    public class UserConnectionConfiguration : IEntityTypeConfiguration<UserConnection>
     {
-        public void Configure(EntityTypeBuilder<UserIPAddress> builder)
+        public void Configure(EntityTypeBuilder<UserConnection> builder)
         {
             builder.ToTable("Bets");
 
@@ -15,17 +15,21 @@ namespace UserIPAnalytics.Infrustructure.Data.Configurations
                 .HasColumnName("Id")
                 .ValueGeneratedOnAdd();
 
-            builder.Property(b => b.IPAddress)
-                .HasColumnName("IPAddress");
+            builder.Property(uc => uc.IpAddress)
+                .IsRequired()
+                .HasMaxLength(45);
 
-            builder.Property(b => b.UserId)
-                .HasColumnName("UserId");
+            builder.Property(uc => uc.UserId)
+                .IsRequired();
 
             builder.Property(b => b.CreatedDate)
               .HasColumnName("CreatedDate");
 
             builder.Property(b => b.UpdatedDate)
               .HasColumnName("UpdatedDate");
+
+            builder.HasIndex(uc => uc.IpAddress)
+         .HasDatabaseName("idx_ip_address");
         }
     }
 }

@@ -5,18 +5,18 @@ using UserIPAnalytics.Infrustructure.Data.Configurations;
 
 namespace UserIPAnalytics.Infrustructure.Data.Context
 {
-    public class UserIPTrackerDbContext : DbContext
+    public class UserIpAnalysticDbContext : DbContext
     {
-        public UserIPTrackerDbContext(DbContextOptions<UserIPTrackerDbContext> options) : base(options)
+        public UserIpAnalysticDbContext(DbContextOptions<UserIpAnalysticDbContext> options) : base(options)
         {
         }
 
-        public UserIPTrackerDbContext()
+        public UserIpAnalysticDbContext()
         {
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<UserIPAddress> UserIPAddress { get; set; }
+        public DbSet<UserConnection> UserIPAddress { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

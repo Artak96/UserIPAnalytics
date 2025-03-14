@@ -19,11 +19,11 @@ namespace UserIPAnalytics.Application.Pipeline.Commands.Handler
 
             if (user == null)
             {
-                var newUser = new User($"Name_{request.UserId}");
-                await _unitOfWork.User.AddAsync(newUser);
+                user = new User($"Name_{request.UserId}");
+                await _unitOfWork.User.AddAsync(user);
             }
 
-            var connection = new UserIPAddress { UserId = userId, IP = ip };
+            var connection = new UserConnection(user.Id, request.IpAddress);
             await _unitOfWork.UserIPAddress.AddAsync(connection);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }

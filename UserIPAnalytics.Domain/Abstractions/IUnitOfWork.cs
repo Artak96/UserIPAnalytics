@@ -4,7 +4,7 @@ namespace UserIPAnalytics.Domain.Abstractions
 {
     public interface IUnitOfWork
     {
-        IUserIPAddressRepository UserIPAddress { get; }
+        IUseConnectionRepository UserIPAddress { get; }
         IUserReppository User { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);

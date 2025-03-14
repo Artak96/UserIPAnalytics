@@ -16,10 +16,10 @@ namespace UserIPAnalytics.Infrustructure
             //services.AddScoped<IBaseRepository, BaseRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWOrk>();
             services.AddScoped<IUserReppository, UserReposirory>();
-            services.AddScoped<IUserIPAddressRepository, UserIPAddressRepository>();
+            services.AddScoped<IUseConnectionRepository, UseConnectionRepository>();
 
             string connectionString = configuration.GetConnectionString("ConnectionString")!;
-            services.AddDbContext<UserIPTrackerDbContext>(options =>
+            services.AddDbContext<UserIpAnalysticDbContext>(options =>
             {
                 options.UseNpgsql(connectionString);
                 options.EnableSensitiveDataLogging(false);

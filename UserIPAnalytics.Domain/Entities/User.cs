@@ -6,6 +6,7 @@ namespace UserIPAnalytics.Domain.Entities
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        public ICollection<UserConnection> UserConnections { get; set; } = new List<UserConnection>();
 
         public User() { }
         public User(string name)

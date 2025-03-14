@@ -8,14 +8,14 @@ namespace UserIPAnalytics.Infrustructure.UOW
 {
     public class UnitOfWOrk : IUnitOfWork
     {
-        private readonly UserIPTrackerDbContext _dbContext;
+        private readonly UserIpAnalysticDbContext _dbContext;
 
-        public UnitOfWOrk(UserIPTrackerDbContext context)
+        public UnitOfWOrk(UserIpAnalysticDbContext context)
         {
             _dbContext = context;
         }
 
-        public IUserIPAddressRepository UserIPAddress => throw new NotImplementedException();
+        public IUseConnectionRepository UserIPAddress => throw new NotImplementedException();
 
         public IUserReppository User => throw new NotImplementedException();
 

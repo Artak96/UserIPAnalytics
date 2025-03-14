@@ -15,6 +15,15 @@ namespace UserIPAnalytics.Infrustructure.Data.Configurations
                 .HasColumnName("Id")
                 .ValueGeneratedOnAdd();
 
+            builder.Property(u => u.Name)
+                .IsRequired()
+                .HasMaxLength(255);
+
+            builder.HasMany(u => u.UserConnections)
+                .WithOne(c => c.User)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Property(b => b.CreatedDate)
             .HasColumnName("CreatedDate");
 

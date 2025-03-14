@@ -8,9 +8,9 @@ namespace UserIPAnalytics.Infrustructure.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : Entity
     {
-        protected readonly UserIPTrackerDbContext _context;
+        protected readonly UserIpAnalysticDbContext _context;
 
-        public BaseRepository(UserIPTrackerDbContext context)
+        public BaseRepository(UserIpAnalysticDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

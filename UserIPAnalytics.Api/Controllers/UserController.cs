@@ -18,10 +18,10 @@ namespace UserIPAnalytics.Api.Controllers
         }
 
         [HttpGet("connect")]
-        public async Task<IActionResult> ConnectUser()
+        public async Task<IActionResult> ConnectUser(long userId)
         {
             string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
-            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            //string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (ipAddress == "::1")
             {
@@ -30,7 +30,8 @@ namespace UserIPAnalytics.Api.Controllers
 
             await _mediator.Send(new AddIPAddressCommand
             {
-                IpAddress = ipAddress
+                IpAddress = ipAddress,
+                UserId = userId
             });
             return Ok(new { Message = "Connection event published." });
         }
