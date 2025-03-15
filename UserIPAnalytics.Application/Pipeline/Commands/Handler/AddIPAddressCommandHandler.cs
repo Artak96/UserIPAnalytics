@@ -24,7 +24,7 @@ namespace UserIPAnalytics.Application.Pipeline.Commands.Handler
             }
 
             var connection = new UserConnection(user.Id, request.IpAddress);
-            await _unitOfWork.UserIPAddress.AddAsync(connection);
+            await _unitOfWork.UserConnection.AddAsync(connection);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }

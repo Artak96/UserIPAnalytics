@@ -6,11 +6,5 @@ namespace UserIPAnalytics.Domain.Abstractions.IRepositories
     {
         Task<User?> GetUserByIdAsync(long Id);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="ipPrefix"></param>
-        /// <returns></returns>
-        Task<List<long>> FindUserIdsByIpPrefixAsync(string ipPrefix);
     }
 }

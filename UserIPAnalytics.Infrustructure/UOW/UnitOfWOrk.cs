@@ -15,7 +15,7 @@ namespace UserIPAnalytics.Infrustructure.UOW
             _dbContext = context;
         }
 
-        public IUseConnectionRepository UserIPAddress => throw new NotImplementedException();
+        public IUseConnectionRepository UserConnection => throw new NotImplementedException();
 
         public IUserReppository User => throw new NotImplementedException();
 

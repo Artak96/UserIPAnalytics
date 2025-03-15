@@ -11,16 +11,24 @@ namespace UserIPAnalytics.Infrustructure.Repositories
         {
         }
 
-        public async Task<List<long>> FindUsersByIpPartAsync(string ipPart)
+        /// <summary>
+        /// Get data by ip addres
+        /// </summary>
+        /// <param name="ipPart"></param>
+        /// <returns></returns>
+        public async Task<List<UserConnection>> FindUsersByIpPartAsync(string ipAddress)
         {
             return await _context.UserIPAddress
-                .Where(uc => uc.IpAddress.StartsWith(ipPart))
-                .Select(uc => uc.UserId)
-                .Distinct()
+                .Where(uc => uc.IpAddress.StartsWith(ipAddress))
                 .ToListAsync();
         }
 
-        public async Task<List<string>> GetAllUserIpsAsync(long userId)
+        /// <summary>
+        /// Get current user ip addres
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<List<string>> GetUserAllIpsAsync(long userId)
         {
             return await _context.UserIPAddress
                 .Where(uc => uc.UserId == userId)
@@ -29,31 +37,18 @@ namespace UserIPAnalytics.Infrustructure.Repositories
                 .ToListAsync();
         }
 
-        public Task<UserConnection?> GetLastConnectionAsync(long userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<(string? IpAddress, DateTime? ConnectionTime)> GetLastUserConnectionAsync(long userId)
+        /// <summary>
+        /// Get user last connection
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<UserConnection?> GetUserLastConnectionAsync(long userId)
         {
             return await _context.UserIPAddress
                 .Where(uc => uc.UserId == userId)
                 .OrderByDescending(uc => uc.CreatedDate)
-                .Select(uc => new { uc.IpAddress, uc.CreatedDate })
-                .FirstOrDefaultAsync()
-                is var result && result != null
-                ? (result.IpAddress, result.CreatedDate)
-                : (null, null);
+                .FirstOrDefaultAsync();
         }
 
-        public Task<List<string>> GetUserIpAddressesAsync(long userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<UserConnection>> IUseConnectionRepository.GetUserIpAddressesAsync(long userId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

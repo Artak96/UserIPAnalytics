@@ -16,4 +16,9 @@
     <ProjectReference Include="..\UserIPAnalytics.Domain\UserIPAnalytics.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Dtos\" />
+    <Folder Include="Models\Request\" />
+  </ItemGroup>
+
 </Project>
