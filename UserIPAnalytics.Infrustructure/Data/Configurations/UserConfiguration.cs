@@ -10,19 +10,14 @@ namespace UserIPAnalytics.Infrustructure.Data.Configurations
         {
             builder.ToTable("Users");
 
-            builder.HasKey(b => b.Id);
-            builder.Property(b => b.Id)
-                .HasColumnName("Id")
-                .ValueGeneratedOnAdd();
+            // Primary Key
+            builder.HasKey(u => u.Id);
 
+            // Properties
             builder.Property(u => u.Name)
-                .IsRequired()
-                .HasMaxLength(255);
+                .IsRequired() // Ensure the Name is required
+                .HasMaxLength(100); // Limit Name length
 
-            builder.HasMany(u => u.UserConnections)
-                .WithOne(c => c.User)
-                .HasForeignKey(c => c.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(b => b.CreatedDate)
             .HasColumnName("CreatedDate");

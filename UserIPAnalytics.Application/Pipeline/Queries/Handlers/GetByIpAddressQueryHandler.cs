@@ -16,7 +16,7 @@ namespace UserIPAnalytics.Application.Pipeline.Queries.Handlers
         {
             var result = await _unitOfWork.UserConnection.FindUsersByIpPartAsync(request.IpAddress);
             var userIpAddreses = new List<FindUserIpAddress>();
-            foreach (var uia in userIpAddreses)
+            foreach (var uia in result)
             {
                 var userData = new FindUserIpAddress
                 {

@@ -4,16 +4,16 @@ using UserIPAnalytics.Domain.Entities;
 
 namespace UserIPAnalytics.Application.Pipeline.Commands.Handler
 {
-    internal class AddIPAddressCommandHandler : IRequestHandler<AddIPAddressCommand>
+    public class UserConnectionCommandHandler : IRequestHandler<UserConnectionCommand>
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public AddIPAddressCommandHandler(IUnitOfWork unitOfWork)
+        public UserConnectionCommandHandler(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Handle(AddIPAddressCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UserConnectionCommand request, CancellationToken cancellationToken)
         {
             var user = await _unitOfWork.User.GetUserByIdAsync(request.UserId);
 
@@ -21,6 +21,8 @@ namespace UserIPAnalytics.Application.Pipeline.Commands.Handler
             {
                 user = new User($"Name_{request.UserId}");
                 await _unitOfWork.User.AddAsync(user);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
             }
 
             var connection = new UserConnection(user.Id, request.IpAddress);

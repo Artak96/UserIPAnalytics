@@ -18,7 +18,7 @@ namespace UserIPAnalytics.Infrustructure.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -28,7 +28,7 @@ namespace UserIPAnalytics.Infrustructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bets",
+                name: "UserConnections",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -40,9 +40,9 @@ namespace UserIPAnalytics.Infrustructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bets", x => x.Id);
+                    table.PrimaryKey("PK_UserConnections", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bets_Users_UserId",
+                        name: "FK_UserConnections_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -50,21 +50,16 @@ namespace UserIPAnalytics.Infrustructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bets_UserId",
-                table: "Bets",
+                name: "IX_UserConnections_UserId",
+                table: "UserConnections",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "idx_ip_address",
-                table: "Bets",
-                column: "IpAddress");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Bets");
+                name: "UserConnections");
 
             migrationBuilder.DropTable(
                 name: "Users");

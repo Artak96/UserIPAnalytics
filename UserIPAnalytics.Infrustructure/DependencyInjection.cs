@@ -15,7 +15,7 @@ namespace UserIPAnalytics.Infrustructure
         {
             //services.AddScoped<IBaseRepository, BaseRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWOrk>();
-            services.AddScoped<IUserReppository, UserReposirory>();
+            //services.AddScoped<IUserReppository, UserReposirory>();
             services.AddScoped<IUseConnectionRepository, UseConnectionRepository>();
 
             string connectionString = configuration.GetConnectionString("ConnectionString")!;

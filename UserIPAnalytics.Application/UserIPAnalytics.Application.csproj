@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dtos\**" />
+    <Compile Remove="Models\Request\**" />
+    <EmbeddedResource Remove="Dtos\**" />
+    <EmbeddedResource Remove="Models\Request\**" />
+    <None Remove="Dtos\**" />
+    <None Remove="Models\Request\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
@@ -14,11 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UserIPAnalytics.Domain\UserIPAnalytics.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dtos\" />
-    <Folder Include="Models\Request\" />
   </ItemGroup>
 
 </Project>

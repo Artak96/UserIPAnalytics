@@ -23,7 +23,7 @@ namespace UserIPAnalytics.Infrustructure.Data.Context
             try
             {
                 base.OnModelCreating(modelBuilder);
-                var entityConfigurationsAssembly = typeof(UserConfiguration).GetTypeInfo().Assembly;
+                var entityConfigurationsAssembly = typeof(UserConnectionConfiguration).GetTypeInfo().Assembly;
                 modelBuilder.ApplyConfigurationsFromAssembly(entityConfigurationsAssembly);
             }
             catch (Exception ex)

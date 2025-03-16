@@ -3,6 +3,7 @@ using UserIPAnalytics.Domain.Abstractions;
 using UserIPAnalytics.Domain.Abstractions.IRepositories;
 using UserIPAnalytics.Domain.Common;
 using UserIPAnalytics.Infrustructure.Data.Context;
+using UserIPAnalytics.Infrustructure.Repositories;
 
 namespace UserIPAnalytics.Infrustructure.UOW
 {
@@ -15,11 +16,13 @@ namespace UserIPAnalytics.Infrustructure.UOW
             _dbContext = context;
         }
 
-        public IUseConnectionRepository UserConnection => throw new NotImplementedException();
+        private UseConnectionRepository _userConnection;
+        public IUseConnectionRepository UserConnection => _userConnection ?? new UseConnectionRepository(_dbContext);
 
-        public IUserReppository User => throw new NotImplementedException();
+        private UserReposirory _user;
+        public IUserReppository User => _user ?? new UserReposirory(_dbContext);
 
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             if (!_dbContext.ChangeTracker.HasChanges())
                 return 0;

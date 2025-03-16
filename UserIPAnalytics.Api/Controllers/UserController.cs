@@ -26,7 +26,7 @@ namespace UserIPAnalytics.Api.Controllers
             if (ipAddress == "::1")
                 ipAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
 
-            await _mediator.Send(new AddIPAddressCommand
+            await _mediator.Send(new UserConnectionCommand
             {
                 IpAddress = ipAddress,
                 UserId = userId
@@ -48,7 +48,7 @@ namespace UserIPAnalytics.Api.Controllers
                 if (ipAddress == "::1")
                     ipAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
 
-                await _mediator.Send(new AddIPAddressCommand
+                await _mediator.Send(new UserConnectionCommand
                 {
                     IpAddress = ipAddress,
                     UserId = userId
@@ -75,7 +75,7 @@ namespace UserIPAnalytics.Api.Controllers
                 if (ipAddress == "::1")
                     ipAddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList[1].ToString();
 
-                await _mediator.Send(new AddIPAddressCommand
+                await _mediator.Send(new UserConnectionCommand
                 {
                     IpAddress = ipAddress,
                     UserId = userId
@@ -87,26 +87,24 @@ namespace UserIPAnalytics.Api.Controllers
         }
 
         [HttpGet("find-users-by-ip")]
-        public async Task<IActionResult> FindUsersByIp(GetByIpAddressQuery query)
+        public async Task<IActionResult> FindUsersByIp([FromQuery] GetByIpAddressQuery query)
         {
             var result = await _mediator.Send(query);
             return Ok(result);
         }
 
-        [HttpGet("{UserId}/ips")]
-        public async Task<IActionResult> GetUserIps(GetUserConnectionsIpsQuery query)
+        [HttpGet("get-user-ips")]
+        public async Task<IActionResult> GetUserIps([FromQuery] GetUserConnectionsIpsQuery query)
         {
             var result = await _mediator.Send(query);
             return Ok(result);
         }
 
-        //[HttpGet("{UserId}/last-connection")]
-        //public async Task<IActionResult> GetLastConnection(long UserId)
-        //{
-        //    var result = await _service.GetLastUserConnectionAsync(UserId);
-        //    return result.IpAddress != null
-        //        ? Ok(result)
-        //        : NotFound("Нет подключений");
-        //}
+        [HttpGet("user-last-connection")]
+        public async Task<IActionResult> GetUserLastConnection([FromQuery] GetUserLastConnectionQuery query)
+        {
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
     }
 }

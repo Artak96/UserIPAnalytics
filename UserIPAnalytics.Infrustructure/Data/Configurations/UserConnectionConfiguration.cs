@@ -8,20 +8,21 @@ namespace UserIPAnalytics.Infrustructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<UserConnection> builder)
         {
-            builder.ToTable("Bets");
+            builder.ToTable("UserConnections");
 
-            builder.HasKey(b => b.Id);
-            builder.Property(b => b.Id)
-                .HasColumnName("Id")
-                .ValueGeneratedOnAdd();
+            // Primary Key
+            builder.HasKey(uc => uc.Id);
 
+            // Properties
             builder.Property(uc => uc.IpAddress)
-                .IsRequired()
-                .HasMaxLength(45);
+                .IsRequired() // Ensure IpAddress is required
+                .HasMaxLength(45); // IPv6 maximum length
 
-            builder.Property(uc => uc.UserId)
-                .IsRequired();
-
+            // Foreign Key to User
+            builder.HasOne(uc => uc.User)
+                .WithMany(u => u.UserConnections)
+                .HasForeignKey(uc => uc.UserId)
+                .OnDelete(DeleteBehavior.Cascade); // Cascade delete when a user is deleted
             builder.Property(b => b.CreatedDate)
               .HasColumnName("CreatedDate");
 

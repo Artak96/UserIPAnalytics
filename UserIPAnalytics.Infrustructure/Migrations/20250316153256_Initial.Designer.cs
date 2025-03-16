@@ -12,7 +12,7 @@ using UserIPAnalytics.Infrustructure.Data.Context;
 namespace UserIPAnalytics.Infrustructure.Migrations
 {
     [DbContext(typeof(UserIpAnalysticDbContext))]
-    [Migration("20250314155438_Initial")]
+    [Migration("20250316153256_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -29,8 +29,7 @@ namespace UserIPAnalytics.Infrustructure.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("Id");
+                        .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
@@ -40,8 +39,8 @@ namespace UserIPAnalytics.Infrustructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("character varying(255)");
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("timestamp with time zone")
@@ -56,8 +55,7 @@ namespace UserIPAnalytics.Infrustructure.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("Id");
+                        .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
@@ -79,12 +77,9 @@ namespace UserIPAnalytics.Infrustructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IpAddress")
-                        .HasDatabaseName("idx_ip_address");
-
                     b.HasIndex("UserId");
 
-                    b.ToTable("Bets", (string)null);
+                    b.ToTable("UserConnections", (string)null);
                 });
 
             modelBuilder.Entity("UserIPAnalytics.Domain.Entities.UserConnection", b =>
